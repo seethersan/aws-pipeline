@@ -23,7 +23,7 @@ Resources:
             ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region" , UbuntuAmi ]
             SecurityGroupIds:
                 - "sg-afdafcc8"
-            KeyName: curso_lima"
+            KeyName: "curso_lima"
             Tags:
             - Key: Name
               Value: !Sub "Curso-Lima"
