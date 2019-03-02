@@ -1,0 +1,35 @@
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: Desplega servidor para curso de Lima.
+Parameters:
+    EnvironmentName:
+        Description: "A prefix for the resource names."
+        Type: String
+        Default: BigData-Production
+Mappings:
+  RegionMap:
+    us-east-1:
+      UbuntuAmi: "ami-0ac019f4fcb7cb7e6" #Ubuntu 18.04
+      RegionAlias: "Virginia"
+
+Resources:
+    Ec2InstanceAirflow:
+        Type: AWS::EC2::Instance
+        DeletionPolicy: Delete
+        Properties:
+            InstanceInitiatedShutdownBehavior: terminate
+            SubnetId: subnet-73294116
+            InstanceType: "t2.micro"
+            ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region" , UbuntuAmi ]
+            SecurityGroupIds:
+                - "sg-afdafcc8"
+            KeyName: curso_lima"
+            Tags:
+            - Key: Name
+              Value: !Sub "Curso-Lima"
+            UserData:
+                Fn::Base64: !Sub |
+                    #!/bin/bash
+                    echo " ####################  apt install"
+                    apt-get update -y
+                    apt install awscli -y
