@@ -4,7 +4,7 @@ phases:
     commands:
       - ls
       - pwd
-      - aws s3 cp --recursive $(pwd) s3://curso-lima/
+      - aws s3 cp --recursive $(pwd) s3://codepipeline-us-east-1-125995632668/
 artifacts:
   files:
     - '**/*'
